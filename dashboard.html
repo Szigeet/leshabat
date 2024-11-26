@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>פאנל ניהול - דשבורד</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css" />
+
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyApsnzL_qb2X7Rcb4tUu0pOH9XlCPKR4sk",
+        authDomain: "eshabat-project.firebaseapp.com",
+        projectId: "eshabat-project",
+        storageBucket: "eshabat-project.firebasestorage.app",
+        messagingSenderId: "603415311450",
+        appId: "1:603415311450:web:526a19d9db65c9abf9d463",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      window.db = db;
+    </script>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <i class="fas fa-store"></i>
+          <h1>פאנל ניהול</h1>
+        </div>
+        <button class="mobile-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active">
+          <i class="fas fa-home"></i>
+          דשבורד
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-box"></i>
+          ניהול מוצרים
+          <span class="badge">24</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-shopping-cart"></i>
+          הזמנות
+          <span class="badge warning">8</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-users"></i>
+          לקוחות
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-chart-bar"></i>
+          דוחות
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-cog"></i>
+          הגדרות
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="user-details">
+            <h3 class="user-name">שם המשתמש</h3>
+            <p class="user-role">מנהל ראשי</p>
+          </div>
+        </div>
+        <button class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i>
+          התנתק
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="top-bar">
+        <button class="menu-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="חיפוש..." class="search-input" />
+        </div>
+
+        <div class="top-actions">
+          <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </button>
+          <button class="help-btn">
+            <i class="fas fa-question-circle"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+        <!-- Stats Cards -->
+        <section class="stats-section">
+          <div class="stats-card" id="orders-today">
+            <div class="stats-icon">
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+            <div class="stats-info">
+              <h3>הזמנות היום</h3>
+              <p class="stats-number">0</p>
+              <span class="stats-trend positive">
+                <i class="fas fa-arrow-up"></i>
+                0%
+              </span>
+            </div>
+          </div>
+
+          <div class="stats-card" id="total-products">
+            <div class="stats-icon">
+              <i class="fas fa-box"></i>
+            </div>
+            <div class="stats-info">
+              <h3>מוצרים במערכת</h3>
+              <p class="stats-number">0</p>
+            </div>
+          </div>
+
+          <div class="stats-card" id="in-stock">
+            <div class="stats-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stats-info">
+              <h3>מוצרים במלאי</h3>
+              <p class="stats-number">0</p>
+            </div>
+          </div>
+
+          <div class="stats-card" id="out-of-stock">
+            <div class="stats-icon">
+              <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="stats-info">
+              <h3>מוצרים שאזלו</h3>
+              <p class="stats-number">0</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products-section">
+          <div class="section-header">
+            <h2>ניהול מוצרים</h2>
+            <button class="add-product-btn">
+              <i class="fas fa-plus"></i>
+              הוסף מוצר
+            </button>
+          </div>
+
+          <div class="products-table-wrapper">
+            <table class="products-table">
+              <thead>
+                <tr>
+                  <th>תמונה</th>
+                  <th>שם המוצר</th>
+                  <th>מק"ט</th>
+                  <th>מחיר</th>
+                  <th>מלאי</th>
+                  <th>סטטוס</th>
+                  <th>פעולות</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- תוכן דינמי -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal" id="productModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>הוספת מוצר חדש</h2>
+          <button class="close-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <form class="product-form">
+          <div class="form-group">
+            <label>שם המוצר</label>
+            <input type="text" name="name" required />
+          </div>
+          <div class="form-group">
+            <label>מק"ט</label>
+            <input type="text" name="sku" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>מחיר</label>
+              <input type="number" name="price" required />
+            </div>
+            <div class="form-group">
+              <label>מלאי</label>
+              <input type="number" name="stock" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>תיאור</label>
+            <textarea name="description" rows="4"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="cancel-btn">ביטול</button>
+            <button type="submit" class="submit-btn">שמור מוצר</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
+
+    <!-- App Scripts -->
+    <script type="module" src="js/dashboard.js"></script>
+  </body>
+</html>

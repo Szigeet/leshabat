@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>פאנל ניהול</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts - Heebo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyApsnzL_qb2X7Rcb4tUu0pOH9XlCPKR4sk",
+        authDomain: "eshabat-project.firebaseapp.com",
+        projectId: "eshabat-project",
+        storageBucket: "eshabat-project.firebasestorage.app",
+        messagingSenderId: "603415311450",
+        appId: "1:603415311450:web:526a19d9db65c9abf9d463",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Make Firebase instances available globally
+      window.db = db;
+    </script>
+  </head>
+  <body class="login-page">
+    <div class="login-container">
+      <div class="login-box">
+        <form id="loginForm" novalidate>
+          <div class="login-header">
+            <div class="logo">
+              <i class="fas fa-user-shield"></i>
+            </div>
+            <h1>פאנל ניהול</h1>
+            <p>ברוכים הבאים למערכת ניהול החנות</p>
+          </div>
+
+          <div class="form-group">
+            <label for="loginEmail">
+              <i class="fas fa-envelope"></i>
+              אימייל
+            </label>
+            <input
+              type="email"
+              id="loginEmail"
+              placeholder="הכנס כתובת אימייל"
+              required
+              autocomplete="email"
+            />
+            <div class="validation-error"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">
+              <i class="fas fa-lock"></i>
+              סיסמה
+            </label>
+            <div class="password-input">
+              <input
+                type="password"
+                id="loginPassword"
+                placeholder="הכנס סיסמה"
+                required
+                minlength="6"
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                aria-label="הצג/הסתר סיסמה"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="validation-error"></div>
+          </div>
+
+          <div class="form-group remember-me">
+            <label class="checkbox-container">
+              <input type="checkbox" id="rememberMe" />
+              <span class="checkmark"></span>
+              זכור אותי
+            </label>
+            <a href="#" class="forgot-password" data-action="forgot-password"
+              >שכחת סיסמה?</a
+            >
+          </div>
+
+          <button type="submit" class="submit-btn" data-action="login">
+            <i class="fas fa-sign-in-alt"></i>
+            התחברות
+            <div class="button-loader"></div>
+          </button>
+        </form>
+      </div>
+
+      <div class="support-link">
+        <a href="#" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-headset"></i>
+          צריך עזרה? צור קשר עם התמיכה
+        </a>
+      </div>
+
+      <div class="toast-container"></div>
+    </div>
+
+    <!-- Error Boundary -->
+    <div id="errorBoundary" style="display: none">
+      <div class="error-content">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h2>שגיאה בטעינת המערכת</h2>
+        <p>אנא רענן את הדף או פנה לתמיכה</p>
+      </div>
+    </div>
+
+    <!-- App Scripts -->
+    <script type="module" src="js/auth.js"></script>
+  </body>
+</html>
